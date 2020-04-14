@@ -11,6 +11,7 @@ import {
 import { Radio } from '@material-ui/icons'
 import { useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
+import { useHistory } from 'react-router-dom'
 
 const GET_SHOW = gql`
   query($showId: ID) {
@@ -20,6 +21,7 @@ const GET_SHOW = gql`
       imageUrl
       genre
       hosts {
+        id
         name
         avatarUrl
       }
@@ -28,11 +30,17 @@ const GET_SHOW = gql`
 `
 
 export default function Show(props) {
+  const history = useHistory()
   const { loading, data } = useQuery(GET_SHOW, {
     variables: {
       showId: props.id
     }
   })
+
+  const setHostAndNavigate = (id) => {
+    props.setHostId(id)
+    history.push('/host')
+  }
 
   return (
     <React.Fragment>
@@ -94,6 +102,7 @@ export default function Show(props) {
             >
               {data.show.hosts.map((host, index) => (
                 <Chip
+                  onClick={() => setHostAndNavigate(host.id)}
                   style={{ margin: '10px' }}
                   key={index}
                   avatar={<Avatar src={host.avatarUrl} />}
@@ -106,7 +115,7 @@ export default function Show(props) {
             <Typography
               style={{
                 textAlign: 'left',
-                maxHeight: '10vh',
+                maxHeight: '20vh',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis'
               }}
