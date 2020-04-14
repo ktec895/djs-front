@@ -11,7 +11,7 @@ import typeDefs from './typeDefs'
 import resolvers from './resolvers'
 
 const client = new ApolloClient({
-  uri: 'http://192.168.0.143:8080/graphql',
+  uri: 'http://192.168.0.123:8080/graphql',
   clientState: {
     cache: new InMemoryCache(),
     defaults: {

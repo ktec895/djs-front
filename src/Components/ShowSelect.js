@@ -31,7 +31,7 @@ export default function ShowSelect(props) {
       <ListItemAvatar>
         { props.show.imageUrl ? 
           <Avatar src={props.show.imageUrl} /> :
-          <Avatar><Radio color='white'/></Avatar>}
+          <Avatar><Radio color='inherit'/></Avatar>}
       </ListItemAvatar>
       <ListItemText>{props.show.name}</ListItemText>
     </ListItem>

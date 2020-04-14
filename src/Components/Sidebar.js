@@ -57,7 +57,7 @@ export default function Sidebar(props) {
         <ListItem onClick={() => history.push('/')}className={classes.listItem}>
           <ListItemAvatar>
             <Avatar>
-              <PlayCircleFilled color='white'/>
+              <PlayCircleFilled color='inherit'/>
             </Avatar>
           </ListItemAvatar>
           <ListItemText>Listen Live</ListItemText>

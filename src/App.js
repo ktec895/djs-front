@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Backdrop, CircularProgress, Grid, createMuiTheme, MuiThemeProvider } from '@material-ui/core'
+import { Backdrop, CircularProgress, Grid, createMuiTheme, MuiThemeProvider, responsiveFontSizes } from '@material-ui/core'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import './App.css'
@@ -17,7 +17,7 @@ const GET_SHOWS = gql`
   }
 `
 
-const light = createMuiTheme({
+let light = createMuiTheme({
   palette: {
     primary: {
       main: '#a1fda1',
@@ -32,7 +32,9 @@ const light = createMuiTheme({
   },
 })
 
-const dark = createMuiTheme({
+light = responsiveFontSizes(light)
+
+let dark = createMuiTheme({
   palette: {
     primary: {
       main: '#fff'
@@ -44,10 +46,13 @@ const dark = createMuiTheme({
   }
 })
 
+dark = responsiveFontSizes(dark)
+
 function App() {
   const { loading, data } = useQuery(GET_SHOWS)
   const [theme, setTheme] = useState(true)
   const [showId, setShowId] = useState('')
+  const [hostId, setHostId] = useState('')
   const [mutate] = useMutation(gql`
     mutation {
       toggleOpen @client
@@ -65,7 +70,7 @@ function App() {
       <Backdrop open={loading}>
         <CircularProgress />
       </Backdrop>
-      {!loading && (
+      {!loading && data && (
         <Sidebar
           shows={data.shows}
           loading={loading}
@@ -80,7 +85,7 @@ function App() {
           <div style={{height: '64px'}} />
         </Grid>
         <Grid item style={{width: '100%'}}>
-          <Content showId={showId} />
+          <Content showId={showId} hostId={hostId} setHostId={setHostId}/>
         </Grid>
       </Grid>
     </MuiThemeProvider>
