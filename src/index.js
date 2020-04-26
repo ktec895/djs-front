@@ -11,7 +11,7 @@ import typeDefs from './typeDefs'
 import resolvers from './resolvers'
 
 const client = new ApolloClient({
-  uri: 'http://192.168.0.123:8080/graphql',
+  uri: 'http://192.168.0.109:8080/graphql',
   clientState: {
     cache: new InMemoryCache(),
     defaults: {
@@ -35,4 +35,4 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.register();

@@ -8,7 +8,7 @@ import {
   Chip,
   Button
 } from '@material-ui/core'
-import { Radio } from '@material-ui/icons'
+import { Radio, Menu } from '@material-ui/icons'
 import { useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import { useHistory } from 'react-router-dom'
@@ -47,20 +47,11 @@ export default function Show(props) {
       <Backdrop open={loading}>
         <CircularProgress />
       </Backdrop>
+      { props.id === "" && (
+        <Typography variant='body1'>Press <Menu fontSize='inherit'/> to select a show</Typography>
+      )}
       {!loading && data && (
         <React.Fragment>
-          {/* <Grid xs={6} item>
-            { data.show.imageUrl ?
-              <Avatar style={{height: '200px', width: '200px', margin: 'auto'}} src={data.show.imageUrl} /> :
-              <Avatar style={{height: '200px', width: '200px', margin: 'auto'}}><Radio style={{height: '70%', width: '70%'}}/></Avatar> 
-            }
-          </Grid>
-          <Grid xs={6} item>
-            { data.show.imageUrl ?
-              <Avatar style={{height: '200px', width: '200px', margin: 'auto'}} src={data.show.imageUrl} /> :
-              <Avatar style={{height: '200px', width: '200px', margin: 'auto'}}><Radio style={{height: '70%', width: '70%'}}/></Avatar> 
-            }
-          </Grid> */}
           <Grid xs={12} item>
             <Grid direction='row' alignItems='center' justify='flex-start' spacing={2} container>
               <Grid item>
@@ -85,14 +76,6 @@ export default function Show(props) {
               </Grid>
             </Grid>
           </Grid>
-          {/* <Grid xs={12} item>
-            <Typography variant="h5">
-              <b>{data.show.name}</b>
-            </Typography>
-          </Grid>
-          <Grid xs={12} item>
-            <Typography variant="subtitle1">{data.show.genre}</Typography>
-          </Grid> */}
           <Grid xs={12} item>
             <Grid
               container
